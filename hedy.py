@@ -198,7 +198,7 @@ def translate_suggestion(suggestion_type):
     return ''
 
 
-class Command:
+class Keyword:
     print = 'print'
     ask = 'ask'
     echo = 'echo'
@@ -236,25 +236,25 @@ class Command:
     while_ = 'while'
 
 
-translatable_commands = {Command.print: ['print'],
-                         Command.ask: ['ask'],
-                         Command.echo: ['echo'],
-                         Command.turn: ['turn'],
-                         Command.sleep: ['sleep'],
-                         Command.color: ['color'],
-                         Command.forward: ['forward'],
-                         Command.add_to_list: ['add', 'to_list'],
-                         Command.remove_from_list: ['remove', 'from'],
-                         Command.list_access: ['at', 'random'],
-                         Command.in_list: ['in'],
-                         Command.not_in_list: ['not in'],
-                         Command.equality: ['is', '=', '=='],
-                         Command.repeat: ['repeat', 'times'],
-                         Command.for_list: ['for', 'in'],
-                         Command.for_loop: ['in', 'range', 'to'],
-                         Command.define: ['define'],
-                         Command.call: ['call'],
-                         Command.returns: ['return'], }
+translatable_keywords = {Keyword.print: ['print'],
+                         Keyword.ask: ['ask'],
+                         Keyword.echo: ['echo'],
+                         Keyword.turn: ['turn'],
+                         Keyword.sleep: ['sleep'],
+                         Keyword.color: ['color'],
+                         Keyword.forward: ['forward'],
+                         Keyword.add_to_list: ['add', 'to_list'],
+                         Keyword.remove_from_list: ['remove', 'from'],
+                         Keyword.list_access: ['at', 'random'],
+                         Keyword.in_list: ['in'],
+                         Keyword.not_in_list: ['not in'],
+                         Keyword.equality: ['is', '=', '=='],
+                         Keyword.repeat: ['repeat', 'times'],
+                         Keyword.for_list: ['for', 'in'],
+                         Keyword.for_loop: ['in', 'range', 'to'],
+                         Keyword.define: ['define'],
+                         Keyword.call: ['call'],
+                         Keyword.returns: ['return'], }
 
 
 class HedyType:
@@ -286,121 +286,121 @@ def promote_types(types, rules):
     return types
 
 
-def add_level(commands, level, add=None, remove=None):
-    # Adds the commands for the given level by taking the commands of the previous level
+def add_level(keywords, level, add=None, remove=None):
+    # Adds the keywords for the given level by taking the keywords of the previous level
     # and adjusting the list based on which keywords need to be added or/and removed
     if not add:
         add = []
     if not remove:
         remove = []
-    commands[level] = [c for c in commands[level - 1] if c not in remove] + add
+    keywords[level] = [c for c in keywords[level - 1] if c not in remove] + add
 
 
-# Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-commands_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 'turn']}
-add_level(commands_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
-add_level(commands_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to_list'])
-add_level(commands_per_level, level=4, add=['clear'])
-add_level(commands_per_level, level=5, add=['else', 'if', 'pressed', 'in', 'not_in'])
-add_level(commands_per_level, level=6)
-add_level(commands_per_level, level=7, add=['repeat', 'times'])
-add_level(commands_per_level, level=8)
-add_level(commands_per_level, level=9)
-add_level(commands_per_level, level=10, add=['for'])
-add_level(commands_per_level, level=11, add=['range', 'to'], remove=['times'])
-add_level(commands_per_level, level=12, add=['define', 'call', 'with'])
-add_level(commands_per_level, level=13, add=['and', 'or'])
-add_level(commands_per_level, level=14)
-add_level(commands_per_level, level=15, add=['while'])
-add_level(commands_per_level, level=16)
-add_level(commands_per_level, level=17, add=['elif'])
-add_level(commands_per_level, level=18, add=['input'], remove=['ask'])
+# Keywords per Hedy level which are used to suggest the closest keyword when kids make a mistake
+keywords_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 'turn']}
+add_level(keywords_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
+add_level(keywords_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to_list'])
+add_level(keywords_per_level, level=4, add=['clear'])
+add_level(keywords_per_level, level=5, add=['else', 'if', 'pressed', 'in', 'not_in'])
+add_level(keywords_per_level, level=6)
+add_level(keywords_per_level, level=7, add=['repeat', 'times'])
+add_level(keywords_per_level, level=8)
+add_level(keywords_per_level, level=9)
+add_level(keywords_per_level, level=10, add=['for'])
+add_level(keywords_per_level, level=11, add=['range', 'to'], remove=['times'])
+add_level(keywords_per_level, level=12, add=['define', 'call', 'with'])
+add_level(keywords_per_level, level=13, add=['and', 'or'])
+add_level(keywords_per_level, level=14)
+add_level(keywords_per_level, level=15, add=['while'])
+add_level(keywords_per_level, level=16)
+add_level(keywords_per_level, level=17, add=['elif'])
+add_level(keywords_per_level, level=18, add=['input'], remove=['ask'])
 
-command_turn_literals = ['right', 'left']
+keyword_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
 
 
-def color_commands_local(language):
+def color_keywords_local(language):
     colors_local = [hedy_translation.translate_keyword_from_en(k, language) for k in english_colors]
     return colors_local
 
 
-def command_make_color_local(language):
+def keyword_make_color_local(language):
     if language == "en":
         return english_colors
     else:
-        return english_colors + color_commands_local(language)
+        return english_colors + color_keywords_local(language)
 
 
-# Commands and their types per level (only partially filled!)
-commands_and_types_per_level = {
-    Command.print: {
+# Keywords and their types per level (only partially filled!)
+keywords_and_types_per_level = {
+    Keyword.print: {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
-    Command.ask: {
+    Keyword.ask: {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
-    Command.turn: {
-        1: command_turn_literals,
+    Keyword.turn: {
+        1: keyword_turn_literals,
         2: [HedyType.integer, HedyType.input],
         12: [HedyType.integer, HedyType.input, HedyType.float]
     },
-    Command.color: {
+    Keyword.color: {
         1: [english_colors, HedyType.list],
         2: [english_colors, HedyType.string, HedyType.input, HedyType.list]},
-    Command.forward: {
+    Keyword.forward: {
         1: [HedyType.integer, HedyType.input],
         12: [HedyType.integer, HedyType.input, HedyType.float]
     },
-    Command.sleep: {
+    Keyword.sleep: {
         1: [HedyType.integer, HedyType.input],
         12: [HedyType.integer, HedyType.input, HedyType.float]
     },
-    Command.list_access: {1: [HedyType.list]},
-    Command.in_list: {1: [HedyType.list]},
-    Command.not_in_list: {1: [HedyType.list]},
-    Command.add_to_list: {1: [HedyType.list]},
-    Command.remove_from_list: {1: [HedyType.list]},
-    Command.equality: {
+    Keyword.list_access: {1: [HedyType.list]},
+    Keyword.in_list: {1: [HedyType.list]},
+    Keyword.not_in_list: {1: [HedyType.list]},
+    Keyword.add_to_list: {1: [HedyType.list]},
+    Keyword.remove_from_list: {1: [HedyType.list]},
+    Keyword.equality: {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list],
         15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list, HedyType.boolean]
     },
-    Command.addition: {
+    Keyword.addition: {
         6: [HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
     },
-    Command.subtraction: {
+    Keyword.subtraction: {
         1: [HedyType.integer, HedyType.input],
         12: [HedyType.integer, HedyType.float, HedyType.input],
     },
-    Command.multiplication: {
+    Keyword.multiplication: {
         1: [HedyType.integer, HedyType.input],
         12: [HedyType.integer, HedyType.float, HedyType.input],
     },
-    Command.division: {
+    Keyword.division: {
         1: [HedyType.integer, HedyType.input],
         12: [HedyType.integer, HedyType.float, HedyType.input],
     },
-    Command.repeat: {7: [HedyType.integer, HedyType.input]},
-    Command.for_list: {10: {HedyType.list}},
-    Command.for_loop: {11: [HedyType.integer, HedyType.input]},
-    Command.smaller: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.smaller_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.bigger: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.bigger_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.not_equal: {
+    Keyword.repeat: {7: [HedyType.integer, HedyType.input]},
+    Keyword.for_list: {10: {HedyType.list}},
+    Keyword.for_loop: {11: [HedyType.integer, HedyType.input]},
+    Keyword.smaller: {14: [HedyType.integer, HedyType.float, HedyType.input]},
+    Keyword.smaller_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
+    Keyword.bigger: {14: [HedyType.integer, HedyType.float, HedyType.input]},
+    Keyword.bigger_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
+    Keyword.not_equal: {
         14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list, HedyType.boolean]
     },
-    Command.pressed: {5: [HedyType.string]}  # TODO: maybe use a seperate type character in the future.
+    Keyword.pressed: {5: [HedyType.string]}  # TODO: maybe use a seperate type character in the future.
 }
 
 # we generate Python strings with ' always, so ' needs to be escaped but " works fine
@@ -410,11 +410,11 @@ characters_that_need_escaping = ["\\", "'"]
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
 
-def get_list_keywords(commands, to_lang):
-    """ Returns a list with the local keywords of the argument 'commands'
+def get_list_keywords(keywords, to_lang):
+    """ Returns a list with the local keywords of the argument 'keywords'
     """
 
-    translation_commands = []
+    translation_keywords = []
     dir = path.abspath(path.dirname(__file__))
     path_keywords = dir + "/content/keywords"
 
@@ -427,29 +427,29 @@ def get_list_keywords(commands, to_lang):
     try:
         with open(to_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             to_yaml_dict = yaml.safe_load(stream)
-        for command in commands:
+        for keyword in keywords:
             try:
-                translation_commands.append(to_yaml_dict[command])
+                translation_keywords.append(to_yaml_dict[keyword])
             except Exception:
-                translation_commands.append(en_yaml_dict[command])
+                translation_keywords.append(en_yaml_dict[keyword])
     except Exception:
-        for command in commands:
-            translation_commands.append(en_yaml_dict[command])
+        for keyword in keywords:
+            translation_keywords.append(en_yaml_dict[keyword])
 
-    return translation_commands
+    return translation_keywords
 
 
 def get_suggestions_for_language(lang, level):
     if not local_keywords_enabled:
         lang = 'en'
 
-    lang_commands = get_list_keywords(commands_per_level[level], lang)
+    lang_keywords = get_list_keywords(keywords_per_level[level], lang)
 
     # if we allow multiple keyword languages:
-    en_commands = get_list_keywords(commands_per_level[level], 'en')
-    en_lang_commands = list(set(en_commands + lang_commands))
+    en_keywords = get_list_keywords(keywords_per_level[level], 'en')
+    en_lang_keywords = list(set(en_keywords + lang_keywords))
 
-    return en_lang_commands
+    return en_lang_keywords
 
 
 def escape_var(var):
@@ -463,22 +463,22 @@ def style_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
 
-def closest_command(input_, known_commands, threshold=2):
-    # Find the closest command to the input, i.e. the one with the smallest distance within the threshold. Returns:
-    #  (None, _)  No suggestion. There is no command similar enough to the input. For example, the distance
+def closest_keyword(input_, known_keywords, threshold=2):
+    # Find the closest keyword to the input, i.e. the one with the smallest distance within the threshold. Returns:
+    #  (None, _)  No suggestion. There is no keyword similar enough to the input. For example, the distance
     #             between 'eechoooo' and 'echo' is higher than the specified threshold.
-    #  (False, _) Invalid suggestion. The suggested command is identical to the input, so it is not a suggestion.
-    #             This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message.
-    #  (True, 'sug') Valid suggestion. A command is similar enough to the input but not identical, e.g. 'aks' -> 'ask'
+    #  (False, _) Invalid suggestion. The suggested keyword is identical to the input, so it is not a suggestion.
+    #             This is to prevent "print is not a keyword in Hedy level 3, did you mean print?" error message.
+    #  (True, 'sug') Valid suggestion. A keyword is similar enough to the input but not identical, e.g. 'aks' -> 'ask'
 
     # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
     minimum_distance = 1000
     result = None
-    for command in known_commands:
-        minimum_distance_for_command = calculate_minimum_distance(command, input_)
-        if minimum_distance_for_command < minimum_distance and minimum_distance_for_command <= threshold:
-            minimum_distance = minimum_distance_for_command
-            result = command
+    for keyword in known_keywords:
+        minimum_distance_for_keyword = calculate_minimum_distance(keyword, input_)
+        if minimum_distance_for_keyword < minimum_distance and minimum_distance_for_keyword <= threshold:
+            minimum_distance = minimum_distance_for_keyword
+            result = keyword
 
     if result:
         if result != input_:
@@ -758,40 +758,40 @@ class TypeValidator(Transformer):
         self.input_string = input_string
 
     def print(self, tree):
-        self.validate_args_type_allowed(Command.print, tree.children, tree.meta)
+        self.validate_args_type_allowed(Keyword.print, tree.children, tree.meta)
 
         return self.to_typed_tree(tree)
 
     def ask(self, tree):
         if self.level > 1:
             self.save_type_to_lookup(tree.children[0].children[0], tree.meta.line, HedyType.input)
-        self.validate_args_type_allowed(Command.ask, tree.children[1:], tree.meta)
+        self.validate_args_type_allowed(Keyword.ask, tree.children[1:], tree.meta)
         return self.to_typed_tree(tree, HedyType.input)
 
     def input(self, tree):
-        self.validate_args_type_allowed(Command.ask, tree.children[1:], tree.meta)
+        self.validate_args_type_allowed(Keyword.ask, tree.children[1:], tree.meta)
         return self.to_typed_tree(tree, HedyType.input)
 
     def forward(self, tree):
         if tree.children:
-            self.validate_args_type_allowed(Command.forward, tree.children, tree.meta)
+            self.validate_args_type_allowed(Keyword.forward, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
     def color(self, tree):
         if tree.children:
-            self.validate_args_type_allowed(Command.color, tree.children, tree.meta)
+            self.validate_args_type_allowed(Keyword.color, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
     def turn(self, tree):
         if tree.children:
             name = tree.children[0].data
-            if self.level > 1 or name not in command_turn_literals:
-                self.validate_args_type_allowed(Command.turn, tree.children, tree.meta)
+            if self.level > 1 or name not in keyword_turn_literals:
+                self.validate_args_type_allowed(Keyword.turn, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
     def sleep(self, tree):
         if tree.children:
-            self.validate_args_type_allowed(Command.sleep, tree.children, tree.meta)
+            self.validate_args_type_allowed(Keyword.sleep, tree.children, tree.meta)
         return self.to_typed_tree(tree)
 
     def assign(self, tree):
@@ -813,7 +813,7 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.list)
 
     def list_access(self, tree):
-        self.validate_args_type_allowed(Command.list_access, tree.children[0], tree.meta)
+        self.validate_args_type_allowed(Keyword.list_access, tree.children[0], tree.meta)
 
         list_name = escape_var(tree.children[0].children[0])
         if tree.children[1] == 'random':
@@ -826,19 +826,19 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.any)
 
     def add(self, tree):
-        self.validate_args_type_allowed(Command.add_to_list, tree.children[1], tree.meta)
+        self.validate_args_type_allowed(Keyword.add_to_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree)
 
     def remove(self, tree):
-        self.validate_args_type_allowed(Command.remove_from_list, tree.children[1], tree.meta)
+        self.validate_args_type_allowed(Keyword.remove_from_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree)
 
     def in_list_check(self, tree):
-        self.validate_args_type_allowed(Command.in_list, tree.children[1], tree.meta)
+        self.validate_args_type_allowed(Keyword.in_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def not_in_list_check(self, tree):
-        self.validate_args_type_allowed(Command.not_in_list, tree.children[1], tree.meta)
+        self.validate_args_type_allowed(Keyword.not_in_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def equality_check(self, tree):
@@ -846,24 +846,24 @@ class TypeValidator(Transformer):
             rules = [int_to_float, int_to_string, float_to_string, input_to_string, input_to_int, input_to_float]
         else:
             rules = [int_to_float, input_to_string, input_to_int, input_to_float, input_to_boolean]
-        self.validate_binary_command_args_type(Command.equality, tree, rules)
+        self.validate_binary_command_args_type(Keyword.equality, tree, rules)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def repeat(self, tree):
-        command = Command.repeat
+        command = Keyword.repeat
         allowed_types = get_allowed_types(command, self.level)
         self.check_type_allowed(command, allowed_types, tree.children[0], tree.meta)
         return self.to_typed_tree(tree, HedyType.none)
 
     def for_list(self, tree):
-        command = Command.for_list
+        command = Keyword.for_list
         allowed_types = get_allowed_types(command, self.level)
         self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
         self.save_type_to_lookup(tree.children[0].children[0], tree.meta.line, HedyType.any)
         return self.to_typed_tree(tree, HedyType.none)
 
     def for_loop(self, tree):
-        command = Command.for_loop
+        command = Keyword.for_loop
         allowed_types = get_allowed_types(command, self.level)
 
         start_type = self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
@@ -914,16 +914,16 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def subtraction(self, tree):
-        return self.to_sum_typed_tree(tree, Command.subtraction)
+        return self.to_sum_typed_tree(tree, Keyword.subtraction)
 
     def addition(self, tree):
-        return self.to_sum_typed_tree(tree, Command.addition)
+        return self.to_sum_typed_tree(tree, Keyword.addition)
 
     def multiplication(self, tree):
-        return self.to_sum_typed_tree(tree, Command.multiplication)
+        return self.to_sum_typed_tree(tree, Keyword.multiplication)
 
     def division(self, tree):
-        return self.to_sum_typed_tree(tree, Command.division)
+        return self.to_sum_typed_tree(tree, Keyword.division)
 
     def to_sum_typed_tree(self, tree, command):
         rules = [int_to_float, input_to_int, input_to_float, input_to_string]
@@ -931,20 +931,20 @@ class TypeValidator(Transformer):
         return TypedTree(tree.data, tree.children, tree.meta, prom_left_type)
 
     def smaller(self, tree):
-        return self.to_comparison_tree(Command.smaller, tree)
+        return self.to_comparison_tree(Keyword.smaller, tree)
 
     def smaller_equal(self, tree):
-        return self.to_comparison_tree(Command.smaller_equal, tree)
+        return self.to_comparison_tree(Keyword.smaller_equal, tree)
 
     def bigger(self, tree):
-        return self.to_comparison_tree(Command.bigger, tree)
+        return self.to_comparison_tree(Keyword.bigger, tree)
 
     def bigger_equal(self, tree):
-        return self.to_comparison_tree(Command.bigger_equal, tree)
+        return self.to_comparison_tree(Keyword.bigger_equal, tree)
 
     def not_equal(self, tree):
         rules = [int_to_float, input_to_int, input_to_float, input_to_string]
-        self.validate_binary_command_args_type(Command.not_equal, tree, rules)
+        self.validate_binary_command_args_type(Keyword.not_equal, tree, rules)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def to_comparison_tree(self, command, tree):
@@ -982,8 +982,8 @@ class TypeValidator(Transformer):
         if arg_type not in allowed_types and not self.ignore_type(arg_type):
             variable = tree.children[0]
 
-            if command in translatable_commands:
-                keywords = translatable_commands[command]
+            if command in translatable_keywords:
+                keywords = translatable_keywords[command]
                 result = hedy_translation.find_command_keywords(
                     self.input_string,
                     self.lang,
@@ -1184,7 +1184,7 @@ class AllCommands(Transformer):
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
-        if production_rule_name in commands_per_level[self.level] or \
+        if production_rule_name in keywords_per_level[self.level] or \
                 production_rule_name in operators or production_rule_name in ['if_pressed', 'if_pressed_else']:
             # if_pressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
@@ -1309,17 +1309,17 @@ class IsValid(Filter):
 
     def error_invalid(self, meta, args):
         invalid_command = args[0][1]
-        sug_exists, suggestion = closest_command(invalid_command, get_suggestions_for_language(self.lang, self.level))
+        sug_exists, suggestion = closest_keyword(invalid_command, get_suggestions_for_language(self.lang, self.level))
 
         if sug_exists is None:  # there is no suggestion
             raise exceptions.MissingCommandException(level=self.level, line_number=meta.line)
         if not sug_exists:  # the suggestion is invalid, i.e. identical to the command
             invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, self.lang)
-            if invalid_command_en == Command.turn:
+            if invalid_command_en == Keyword.turn:
                 arg = args[1][1]
                 raise hedy.exceptions.InvalidArgumentException(
                     command=invalid_command,
-                    allowed_types=get_allowed_types(Command.turn, self.level),
+                    allowed_types=get_allowed_types(Keyword.turn, self.level),
                     invalid_argument=arg,
                     line_number=meta.line)
             # clearly the error message here should be better or it should be a different one!
@@ -1396,38 +1396,38 @@ class IsValid(Filter):
             command='ifpressed_else', level=self.level, line_number=meta.line)
 
     def if_pressed_no_colon(self, meta, args):
-        raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
+        raise exceptions.MissingColonException(command=Keyword.if_, line_number=meta.line)
 
     def if_pressed_elifs_no_colon(self, meta, args):
         # if_pressed_elifs starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line + 1)
+        raise exceptions.MissingColonException(command=Keyword.elif_, line_number=meta.line + 1)
 
     def if_pressed_elses_no_colon(self, meta, args):
         # if_pressed_elses starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line + 1)
+        raise exceptions.MissingColonException(command=Keyword.else_, line_number=meta.line + 1)
 
     def ifs_no_colon(self, meta, args):
-        raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
+        raise exceptions.MissingColonException(command=Keyword.if_, line_number=meta.line)
 
     def elifs_no_colon(self, meta, args):
         # elifs starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line + 1)
+        raise exceptions.MissingColonException(command=Keyword.elif_, line_number=meta.line + 1)
 
     def elses_no_colon(self, meta, args):
         # elses starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line + 1)
+        raise exceptions.MissingColonException(command=Keyword.else_, line_number=meta.line + 1)
 
     def for_list_no_colon(self, meta, args):
-        raise exceptions.MissingColonException(command=Command.for_list, line_number=meta.line)
+        raise exceptions.MissingColonException(command=Keyword.for_list, line_number=meta.line)
 
     def for_loop_no_colon(self, meta, args):
-        raise exceptions.MissingColonException(command=Command.for_loop, line_number=meta.line)
+        raise exceptions.MissingColonException(command=Keyword.for_loop, line_number=meta.line)
 
     def while_loop_no_colon(self, meta, args):
-        raise exceptions.MissingColonException(command=Command.while_, line_number=meta.line)
+        raise exceptions.MissingColonException(command=Keyword.while_, line_number=meta.line)
 
     def define_no_colon(self, meta, args):
-        raise exceptions.MissingColonException(command=Command.define, line_number=meta.line)
+        raise exceptions.MissingColonException(command=Keyword.define, line_number=meta.line)
 
     # other rules are inherited from Filter
 
@@ -1536,7 +1536,7 @@ def find_unquoted_segments(s):
 
 def get_allowed_types(command, level):
     # get only the allowed types of the command for all levels before the requested level
-    allowed = [values for key, values in commands_and_types_per_level[command].items() if key <= level]
+    allowed = [values for key, values in keywords_and_types_per_level[command].items() if key <= level]
     # use the allowed types of the highest level available
     return allowed[-1] if allowed else []
 
@@ -1894,12 +1894,12 @@ class ConvertToPython_1(ConvertToPython):
             return f"t.pencolor('black'){self.add_debug_breakpoint()}"  # no arguments defaults to black ink
 
         arg = self.unpack(args[0])
-        if arg in command_make_color_local(self.language):
+        if arg in keyword_make_color_local(self.language):
             return f"t.pencolor('{arg}'){self.add_debug_breakpoint()}"
         else:
             # the TypeValidator should protect against reaching this line:
-            raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
-                                                          allowed_types=get_allowed_types(Command.color, self.level),
+            raise exceptions.InvalidArgumentTypeException(command=Keyword.color, invalid_type='', invalid_argument=arg,
+                                                          allowed_types=get_allowed_types(Keyword.color, self.level),
                                                           line_number=meta.line)
 
     def turn(self, meta, args):
@@ -1913,18 +1913,18 @@ class ConvertToPython_1(ConvertToPython):
             return f"t.right(90){self.add_debug_breakpoint()}"
         else:
             # the TypeValidator should protect against reaching this line:
-            raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
-                                                          allowed_types=get_allowed_types(Command.turn, self.level),
+            raise exceptions.InvalidArgumentTypeException(command=Keyword.turn, invalid_type='', invalid_argument=arg,
+                                                          allowed_types=get_allowed_types(Keyword.turn, self.level),
                                                           line_number=meta.line)
 
     def make_turn(self, parameter):
-        return self.make_turtle_command(parameter, Command.turn, 'right', False, HedyType.integer)
+        return self.make_turtle_command(parameter, Keyword.turn, 'right', False, HedyType.integer)
 
     def make_forward(self, parameter):
-        return self.make_turtle_command(parameter, Command.forward, 'forward', True, HedyType.integer)
+        return self.make_turtle_command(parameter, Keyword.forward, 'forward', True, HedyType.integer)
 
     def make_play(self, note, meta):
-        ex = make_value_error(Command.play, 'suggestion_note', self.language)
+        ex = make_value_error(Keyword.play, 'suggestion_note', self.language)
 
         return textwrap.dedent(f"""\
                 play(note_with_error(localize('{note}'), {ex}))
@@ -1943,7 +1943,7 @@ class ConvertToPython_1(ConvertToPython):
         return transpiled
 
     def make_turtle_color_command(self, parameter, command, command_text, language):
-        both_colors = command_make_color_local(language)
+        both_colors = keyword_make_color_local(language)
         variable = self.get_fresh_var('__trtl')
 
         # we translate the color value to English at runtime, since it might be decided at runtime
@@ -2019,7 +2019,7 @@ class ConvertToPython_2(ConvertToPython_1):
         value = self.unpack(args[0])
         value = self.process_arg_for_fstring(value, meta.line)
 
-        return self.make_turtle_color_command(value, Command.color, 'pencolor', self.language)
+        return self.make_turtle_color_command(value, Keyword.color, 'pencolor', self.language)
 
     def turn(self, meta, args):
         if not args:
@@ -2093,7 +2093,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if not self.is_variable_with_definition(note, meta.line):
             note = f"'{note}'"
 
-        ex = make_value_error(Command.play, 'suggestion_note', self.language)
+        ex = make_value_error(Keyword.play, 'suggestion_note', self.language)
         return textwrap.dedent(f"""\
                 play(note_with_error(localize({note}), {ex}))
                 time.sleep(0.5)""") + self.add_debug_breakpoint()
@@ -2119,7 +2119,7 @@ class ConvertToPython_2(ConvertToPython_1):
         value = f'"{value}"' if self.is_int(value) else value
         self.try_register_variable_access(value, meta.line)
         index_exception = self.make_index_error_check_if_list(args)
-        ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
+        ex = make_value_error(Keyword.sleep, 'suggestion_number', self.language)
         return f"{index_exception}time.sleep(int_with_error({value}, {ex})){self.add_debug_breakpoint()}"
 
 
@@ -2411,7 +2411,7 @@ class ConvertToPython_6(ConvertToPython_5):
         else:
             value = f'"{self.unpack(arg)}"'
         index_exception = self.make_index_error_check_if_list(args)
-        ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
+        ex = make_value_error(Keyword.sleep, 'suggestion_number', self.language)
         return index_exception + textwrap.dedent(f"time.sleep(int_with_error({value}, {ex}))")
 
     def ask(self, meta, args):
@@ -2444,7 +2444,7 @@ class ConvertToPython_6(ConvertToPython_5):
             # We end up here in case of list access, e.g. 'random.choice[animals]'
             arg = f"{arg}.data"
 
-        ex = make_value_error(Command.play, 'suggestion_note', self.language)
+        ex = make_value_error(Keyword.play, 'suggestion_note', self.language)
         return textwrap.dedent(f"""\
                 play(note_with_error(localize({arg}), {ex}))
                 time.sleep(0.5)""") + self.add_debug_breakpoint()
@@ -2676,7 +2676,7 @@ class ConvertToPython_7(ConvertToPython_6):
             body = "\n".join([self.indent(x) for x in args[1:]])
 
         body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
-        ex = make_value_error(Command.repeat, 'suggestion_number', self.language)
+        ex = make_value_error(Keyword.repeat, 'suggestion_number', self.language)
         return f"for {var_name} in range(int_with_error({times}, {ex})):{self.add_debug_breakpoint()}\n{body}"
 
 
@@ -2782,7 +2782,7 @@ class ConvertToPython_11(ConvertToPython_10):
         if self.is_variable(arg, meta.line) or self.is_list_access(arg):
             var = escape_var(arg)
             if runtime_error:
-                ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
+                ex = make_value_error(Keyword.sleep, 'suggestion_number', self.language)
                 return f'int_with_error({var}.data, {ex})'
             else:
                 return f'int({var}.data)'
@@ -2874,7 +2874,7 @@ class ConvertToPython_12(ConvertToPython_11):
             # We end up here in case of list access, e.g. 'random.choice[animals]'
             arg = f"{arg}.data"
 
-        ex = make_value_error(Command.play, 'suggestion_note', self.language)
+        ex = make_value_error(Keyword.play, 'suggestion_note', self.language)
         return textwrap.dedent(f"""\
                 play(note_with_error(localize({arg}), {ex}))
                 time.sleep(0.5)""") + self.add_debug_breakpoint()
@@ -2887,7 +2887,7 @@ class ConvertToPython_12(ConvertToPython_11):
         if self.has_variable_with_definition(args, meta.line):
             lhs = self.scoped_var_access(lhs, meta.line) if self.is_variable(lhs, meta.line) else lhs
             rhs = self.scoped_var_access(rhs, meta.line) if self.is_variable(rhs, meta.line) else rhs
-            ex_text = make_values_error(Command.addition, 'suggestion_numbers_or_strings', self.language)
+            ex_text = make_values_error(Keyword.addition, 'suggestion_numbers_or_strings', self.language)
             value = f'sum_with_error({lhs}, {rhs}, {ex_text})'
         else:
             value = f'{lhs} + {rhs}'
@@ -2909,7 +2909,7 @@ class ConvertToPython_12(ConvertToPython_11):
             value = f'{self.unpack(args[0])}'
 
         index_exception = self.make_index_error_check_if_list(args)
-        ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
+        ex = make_value_error(Keyword.sleep, 'suggestion_number', self.language)
         return index_exception + textwrap.dedent(f"time.sleep(int_with_error({value}, {ex}))")
 
     def turn(self, meta, args):
@@ -2934,10 +2934,10 @@ class ConvertToPython_12(ConvertToPython_11):
         return self.make_forward(value)
 
     def make_turn(self, parameter):
-        return self.make_turtle_command(parameter, Command.turn, 'right', False, HedyType.float)
+        return self.make_turtle_command(parameter, Keyword.turn, 'right', False, HedyType.float)
 
     def make_forward(self, parameter):
-        return self.make_turtle_command(parameter, Command.forward,
+        return self.make_turtle_command(parameter, Keyword.forward,
                                         'forward', True, HedyType.float)
 
     def assign(self, meta, args):
