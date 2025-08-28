@@ -217,9 +217,6 @@ msgstr ""
 msgid "admin"
 msgstr ""
 
-msgid "advance_button"
-msgstr "Gå til nivå {level}"
-
 msgid "adventure"
 msgstr "Eventyr"
 
@@ -347,10 +344,6 @@ msgid "cant_parse_exception"
 msgstr ""
 
 #, fuzzy
-msgid "certificate"
-msgstr ""
-
-#, fuzzy
 msgid "certified_teacher"
 msgstr ""
 
@@ -359,6 +352,9 @@ msgstr "Endre passord"
 
 msgid "cheatsheet_title"
 msgstr "Skjul hjelpeark"
+
+msgid "choose_a_voice"
+msgstr ""
 
 msgid "class_already_joined"
 msgstr "Du er allerede elev i denne klassen"
@@ -445,10 +441,6 @@ msgid "commands"
 msgstr ""
 
 #, fuzzy
-msgid "congrats_message"
-msgstr ""
-
-#, fuzzy
 msgid "connect_guest_teacher"
 msgstr ""
 
@@ -481,23 +473,12 @@ msgstr "Kopiert til utklippstavlen"
 msgid "copy_code"
 msgstr ""
 
-#, fuzzy
-msgid "copy_join_link"
-msgstr ""
-
-#, fuzzy
-msgid "copy_link_success"
-msgstr "Kopier lenken for å dele"
-
 msgid "copy_link_to_share"
 msgstr "Kopier lenken for å dele"
 
 #, fuzzy
 msgid "copy_mail_link"
 msgstr ""
-
-msgid "correct_answer"
-msgstr "Det rette svaret er"
 
 msgid "country"
 msgstr "Land"
@@ -637,9 +618,6 @@ msgstr "Slett profil"
 msgid "destroy_account_message"
 msgstr ""
 
-msgid "developers_mode"
-msgstr "Programmeringsmodus"
-
 msgid "directly_available"
 msgstr "Åpne på direkten"
 
@@ -648,19 +626,7 @@ msgid "disable"
 msgstr ""
 
 #, fuzzy
-msgid "disable_parsons"
-msgstr ""
-
-#, fuzzy
-msgid "disable_quizes"
-msgstr ""
-
-#, fuzzy
 msgid "disabled"
-msgstr ""
-
-#, fuzzy
-msgid "disabled_button_quiz"
 msgstr ""
 
 #, fuzzy
@@ -706,9 +672,6 @@ msgstr "E-post"
 msgid "email_invalid"
 msgstr "Angi en gyldig e-postadresse."
 
-msgid "end_quiz"
-msgstr "Slutt på quizen"
-
 #, fuzzy
 msgid "english"
 msgstr ""
@@ -733,14 +696,6 @@ msgstr ""
 msgid "exclamation mark"
 msgstr "et utropstegn"
 
-#, fuzzy
-msgid "exercise"
-msgstr ""
-
-#, fuzzy
-msgid "exercise_doesnt_exist"
-msgstr ""
-
 msgid "exists_email"
 msgstr "E-postadressen er allerede i bruk."
 
@@ -759,6 +714,9 @@ msgstr "Vennligst velg svar på spørsmål om programmeringserfaring (Ja/Nei)."
 
 msgid "expiration_date"
 msgstr "Utløpsdato"
+
+msgid "facebook_page"
+msgstr ""
 
 #, fuzzy
 msgid "favorite_program"
@@ -808,10 +766,6 @@ msgstr ""
 msgid "from_video"
 msgstr ""
 
-#, fuzzy
-msgid "fun_statistics_msg"
-msgstr ""
-
 msgid "gender"
 msgstr "Kjønn"
 
@@ -820,10 +774,6 @@ msgstr "Vennligst velg et gyldig kjønn (jente, gutt, annet)."
 
 msgid "general_settings"
 msgstr "Generelle innstillinger"
-
-#, fuzzy
-msgid "get_certificate"
-msgstr ""
 
 #, fuzzy
 msgid "give_link_to_teacher"
@@ -835,12 +785,6 @@ msgstr ""
 
 msgid "go_back_to_main"
 msgstr "Gå tilbake til hovedsiden"
-
-msgid "go_to_question"
-msgstr "Gå til spørsmål"
-
-msgid "go_to_quiz_result"
-msgstr "Gå til quiz oppsummeringen"
 
 msgid "go_to_your_clone"
 msgstr ""
@@ -900,14 +844,6 @@ msgstr ""
 
 msgid "highest_level_reached"
 msgstr "Høyeste nivå nådd"
-
-#, fuzzy
-msgid "highest_quiz_score"
-msgstr ""
-
-#, fuzzy
-msgid "hint"
-msgstr ""
 
 #, fuzzy
 msgid "ill_work_some_more"
@@ -1072,6 +1008,9 @@ msgstr ""
 msgid "link"
 msgstr "Logg inn"
 
+msgid "linkedin_page"
+msgstr ""
+
 msgid "list"
 msgstr "en liste"
 
@@ -1095,10 +1034,6 @@ msgstr ""
 
 msgid "logout"
 msgstr "Logg ut"
-
-#, fuzzy
-msgid "longest_program"
-msgstr ""
 
 #, fuzzy
 msgid "mail_change_password_body"
@@ -1178,9 +1113,6 @@ msgstr ""
 msgid "male"
 msgstr "Gutt"
 
-msgid "mandatory_mode"
-msgstr "Obligatorisk utviklermodus"
-
 #, fuzzy
 msgid "more_info"
 msgstr ""
@@ -1239,10 +1171,6 @@ msgstr ""
 
 #, fuzzy
 msgid "next_adventure"
-msgstr ""
-
-#, fuzzy
-msgid "next_exercise"
 msgstr ""
 
 #, fuzzy
@@ -1333,9 +1261,6 @@ msgstr ""
 msgid "number_of_errors"
 msgstr ""
 
-msgid "number_programs"
-msgstr "Antall programmer"
-
 msgid "ok"
 msgstr ""
 
@@ -1392,10 +1317,6 @@ msgstr "Vi klarte ikke å finne den siden!"
 msgid "pair_with_teacher"
 msgstr ""
 
-#, fuzzy
-msgid "parsons_title"
-msgstr "Hedy"
-
 msgid "password"
 msgstr "Passord"
 
@@ -1435,10 +1356,6 @@ msgstr "Ubesvarte invitasjoner"
 
 #, fuzzy
 msgid "people_with_a_link"
-msgstr ""
-
-#, fuzzy
-msgid "percentage"
 msgstr ""
 
 msgid "period"
@@ -1568,33 +1485,11 @@ msgstr "Din offentlige profil ble oppdatert."
 msgid "question mark"
 msgstr "et spørsmålstegn"
 
-#, fuzzy
-msgid "quiz_logo_alt"
-msgstr ""
-
-#, fuzzy
-msgid "quiz_score"
-msgstr ""
-
-#, fuzzy
-msgid "quiz_tab"
-msgstr ""
-
-#, fuzzy
-msgid "quiz_threshold_not_reached"
-msgstr ""
-
-msgid "read_code_label"
-msgstr "Les høyt"
-
 msgid "recent"
 msgstr "Mine siste programmer"
 
 msgid "recover_password"
 msgstr "Be om at passordet tilbakestilles"
-
-msgid "regress_button"
-msgstr "Gå tilbake til nivå {level}"
 
 msgid "remove"
 msgstr "Fjern"
@@ -1703,9 +1598,6 @@ msgstr "Programmet ble lagret."
 
 msgid "save_turtle_drawing"
 msgstr ""
-
-msgid "score"
-msgstr "Poengsum"
 
 msgid "search"
 msgstr "Søk..."
@@ -1845,10 +1737,6 @@ msgid "start_learning"
 msgstr ""
 
 #, fuzzy
-msgid "start_quiz"
-msgstr ""
-
-#, fuzzy
 msgid "start_teaching"
 msgstr ""
 
@@ -1907,9 +1795,6 @@ msgstr "elever"
 #, fuzzy
 msgid "submission_time"
 msgstr ""
-
-msgid "submit_answer"
-msgstr "Svar på spørsmål"
 
 msgid "submit_program"
 msgstr "Send inn"
@@ -2047,9 +1932,6 @@ msgstr "Hedy - Tilpass klasse"
 msgid "title_for-teacher"
 msgstr "Hedy - For lærere"
 
-msgid "title_join-class"
-msgstr "Hedy - Bli med i klassen"
-
 msgid "title_learn-more"
 msgstr "Hedy - Lær mer"
 
@@ -2125,10 +2007,6 @@ msgid "unknown_variable_role"
 msgstr ""
 
 #, fuzzy
-msgid "unlock_thresholds"
-msgstr ""
-
-#, fuzzy
 msgid "unsaved_class_changes"
 msgstr ""
 
@@ -2184,10 +2062,6 @@ msgstr ""
 msgid "user"
 msgstr "Brukernavn"
 
-#, fuzzy
-msgid "user_inexistent"
-msgstr ""
-
 msgid "user_not_private"
 msgstr "Denne brukeren eksisterer ikke, eller så har de ikke opprettet en offentlig profil"
 
@@ -2223,10 +2097,6 @@ msgid "usernames_unavailable"
 msgstr ""
 
 #, fuzzy
-msgid "value"
-msgstr ""
-
-#, fuzzy
 msgid "view_adventures"
 msgstr ""
 
@@ -2254,10 +2124,6 @@ msgstr ""
 
 #, fuzzy
 msgid "what_is_your_role"
-msgstr ""
-
-#, fuzzy
-msgid "what_should_my_code_do"
 msgstr ""
 
 msgid "workbook_circle_question_text"
@@ -2782,4 +2648,121 @@ msgstr ""
 
 #~ msgid "hide_cheatsheet"
 #~ msgstr "Skjul hjelpeark"
+
+#~ msgid "advance_button"
+#~ msgstr "Gå til nivå {level}"
+
+#~ msgid "correct_answer"
+#~ msgstr "Det rette svaret er"
+
+#~ msgid "developers_mode"
+#~ msgstr "Programmeringsmodus"
+
+#~ msgid "disable_parsons"
+#~ msgstr ""
+
+#~ msgid "disable_quizes"
+#~ msgstr ""
+
+#~ msgid "disabled_button_quiz"
+#~ msgstr ""
+
+#~ msgid "end_quiz"
+#~ msgstr "Slutt på quizen"
+
+#~ msgid "exercise"
+#~ msgstr ""
+
+#~ msgid "exercise_doesnt_exist"
+#~ msgstr ""
+
+#~ msgid "get_certificate"
+#~ msgstr ""
+
+#~ msgid "go_to_question"
+#~ msgstr "Gå til spørsmål"
+
+#~ msgid "go_to_quiz_result"
+#~ msgstr "Gå til quiz oppsummeringen"
+
+#~ msgid "hint"
+#~ msgstr ""
+
+#~ msgid "next_exercise"
+#~ msgstr ""
+
+#~ msgid "percentage"
+#~ msgstr ""
+
+#~ msgid "quiz_logo_alt"
+#~ msgstr ""
+
+#~ msgid "quiz_score"
+#~ msgstr ""
+
+#~ msgid "quiz_threshold_not_reached"
+#~ msgstr ""
+
+#~ msgid "regress_button"
+#~ msgstr "Gå tilbake til nivå {level}"
+
+#~ msgid "score"
+#~ msgstr "Poengsum"
+
+#~ msgid "start_quiz"
+#~ msgstr ""
+
+#~ msgid "submit_answer"
+#~ msgstr "Svar på spørsmål"
+
+#~ msgid "title_join-class"
+#~ msgstr "Hedy - Bli med i klassen"
+
+#~ msgid "unlock_thresholds"
+#~ msgstr ""
+
+#~ msgid "value"
+#~ msgstr ""
+
+#~ msgid "what_should_my_code_do"
+#~ msgstr ""
+
+#~ msgid "certificate"
+#~ msgstr ""
+
+#~ msgid "congrats_message"
+#~ msgstr ""
+
+#~ msgid "fun_statistics_msg"
+#~ msgstr ""
+
+#~ msgid "highest_quiz_score"
+#~ msgstr ""
+
+#~ msgid "longest_program"
+#~ msgstr ""
+
+#~ msgid "number_programs"
+#~ msgstr "Antall programmer"
+
+#~ msgid "user_inexistent"
+#~ msgstr ""
+
+#~ msgid "copy_join_link"
+#~ msgstr ""
+
+#~ msgid "copy_link_success"
+#~ msgstr "Kopier lenken for å dele"
+
+#~ msgid "mandatory_mode"
+#~ msgstr "Obligatorisk utviklermodus"
+
+#~ msgid "parsons_title"
+#~ msgstr ""
+
+#~ msgid "quiz_tab"
+#~ msgstr ""
+
+#~ msgid "read_code_label"
+#~ msgstr "Les høyt"
 
